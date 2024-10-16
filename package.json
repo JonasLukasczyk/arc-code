@@ -14,21 +14,19 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+	"activationEvents": [
+		"onWebviewPanel:arc-code"
+	],
   "main": "./out/extension.js",
   "contributes": {
-    "customEditors": [
+		"commands": [
 			{
-				"viewType": "arc-code.window",
-				"displayName": "ARC Code",
-				"selector": [
-					{
-						"filenamePattern": "*.test"
-					}
-				]
+				"command": "arc-code.start",
+				"title": "Start ARC Code",
+				"category": "ARC Code"
 			}
 		]
-  },
+	},
   "scripts": {
     "vscode:prepublish": "npm run compile",
 
