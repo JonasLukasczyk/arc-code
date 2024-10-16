@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZZ</title>
+
+  <style>
+    body {
+      color: white;
+    }
+  </style>
+
+  <script>
+    const init = ()=>{
+      document.getElementById('bob').value = 'init';
+      window.parent.postMessage('test','*');
+    };
+
+    setTimeout(init, 1000);
+  </script>
+</head>
+<body>
+  <h2>HELLO</h2>
+  <textarea id='bob'></textarea>
+</body>
+</html>
