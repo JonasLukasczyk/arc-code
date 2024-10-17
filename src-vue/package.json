@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fslab/fsspreadsheet": "^6.2.0",
     "@nfdi4plants/arctrl": "^2.0.1",
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.8.3",

@@ -6,30 +6,85 @@
   "engines": {
     "vscode": "^1.94.0"
   },
-"license": "MIT",
-"repository": {
-		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
-	},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-extension-samples"
+  },
   "categories": [
     "Other"
   ],
-	"activationEvents": [
-		"onWebviewPanel:arc-code"
-	],
+  "activationEvents": [
+    "onWebviewPanel:arc-code"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-		"commands": [
-			{
-				"command": "arc-code.start",
-				"title": "Start ARC Code",
-				"category": "ARC Code"
-			}
-		]
-	},
+    "commands": [
+      {
+        "command": "arc-code.start",
+        "title": "Start ARC Code",
+        "category": "ARC Code"
+      },
+      {
+        "command": "arc-code.edit_investigation",
+        "title": "Edit Investigation"
+      },
+      {
+        "command": "arc-code.add_study",
+        "title": "Add Study"
+      },
+      {
+        "command": "arc-code.edit_study",
+        "title": "Edit Study"
+      },
+      {
+        "command": "arc-code.delete_study",
+        "title": "Delete Study"
+      },
+      {
+        "command": "arc-code.add_assay",
+        "title": "Add Assay"
+      },
+      {
+        "command": "arc-code.edit_assay",
+        "title": "Edit Assay"
+      },
+      {
+        "command": "arc-code.delete_assay",
+        "title": "Delete Assay"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+            "command": "arc-code.edit_investigation",
+            "group": "navigation"
+        },
+        {
+            "command": "arc-code.edit_study",
+            "when": "explorerResourceIsFolder && resourceDirname =~ /.*?[\\\\\\\/]studies$/",
+            "group": "navigation@1"
+        },
+        {
+            "command": "arc-code.delete_study",
+            "when": "explorerResourceIsFolder && resourceDirname =~ /.*?[\\\\\\\/]studies$/",
+            "group": "navigation@2"
+        },
+        {
+            "command": "arc-code.add_study",
+            "when": "explorerResourceIsFolder && resourceFilename == studies",
+            "group": "navigation"
+        }
+      ]
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-
+    "build_vue": "npm run build --prefix=./src-vue/",
+    "build_plugin": "./node_modules/vsce/vsce package",
+    "install": "code --uninstall-extension undefined_publisher.arc-code; code --install-extension ./arc-code-0.0.1.vsix",
+    "full": "npm run build_vue;npm run build_plugin;npm run install; code",
+    "full2": "npm run build_plugin;npm run install; code",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
@@ -37,15 +92,18 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.94.0",
     "@types/mocha": "^10.0.8",
     "@types/node": "20.x",
+    "@types/vscode": "^1.94.0",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.11.1",
     "typescript": "^5.6.2",
-    "vsce": "^2.15.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@nfdi4plants/arctrl": "^2.0.1"
   }
 }
